@@ -6,9 +6,9 @@ public class q4 {
       TAM é a quantidade de coordenadas e o tamanho do tabuleiro
       tamVet é o tamanho do vetor que serão guardadas as coordenadas, linha e coluna, nessa ordem
     */
-    final int TAM = 3, tamVet = TAM*2;             
+    final int TAM = 5, tamVet = TAM*2;             
     int i, j=0, k, iguais;
-    int p1[] = {0, 1, 2, 2, 2, 0}, p2[] = {0, 0, 1, 1, 1, 2};   
+    int p1[] = {0, 3, 1, 1, 2, 3, 3, 2, 4, 0}, p2[] = {0, 1, 0, 4, 1, 1, 2, 4, 3, 2};   
     String tabul1[][], tabul2[][];
 
    
@@ -70,7 +70,7 @@ public class q4 {
     }  
 
     // Posições das colunas
-    System.out.println("   0  1  2");
+    System.out.println("   0  1  2  3  4");
 
     // Coloca um - nas posições restantes, sem o navio, e imprime o que tem no array tabul1
     for (i=0; i<TAM; i++) {
@@ -135,7 +135,7 @@ public class q4 {
     }
 
     // Posições das colunas
-    System.out.println("   0  1  2");
+    System.out.println("   0  1  2  3  4");
 
     // Coloca um - nas posições restantes, sem o navio, e imprime o que tem no array tabul2
     for (i=0; i<TAM; i++) {
@@ -241,7 +241,7 @@ public class q4 {
       // Imprime o estado do tabuleiro
       
       // Posições das colunas
-      System.out.println("   0  1  2");
+      System.out.println("   0  1  2  3  4");
 
       for (m=0; m<TAM; m++) {
         // Coloca a posição das linhas
@@ -333,7 +333,7 @@ public class q4 {
       // Imprime o estado do tabuleiro
 
       // Posições das colunas
-      System.out.println("   0  1  2");
+      System.out.println("   0  1  2  3  4");
 
       for (m=0; m<TAM; m++) {
         // Coloca a posição das linhas
@@ -385,7 +385,7 @@ public class q4 {
     // Imprimindo o estado final dos dois tabuleiros
 
     // Posições das colunas
-    System.out.println("   0  1  2");
+    System.out.println("   0  1  2  3  4");
 
     for (i=0; i<TAM; i++) {
       // Coloca a posição das linhas
@@ -401,7 +401,7 @@ public class q4 {
     System.out.println("\n");
 
     // Posições das colunas
-    System.out.println("   0  1  2");
+    System.out.println("   0  1  2  3  4");
 
     for (i=0; i<TAM; i++) {
       // Coloca a posição das linhas
