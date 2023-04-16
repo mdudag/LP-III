@@ -1,0 +1,49 @@
+// Inclua no modelo Lampada (Exercício 1) uma operação estaLigada que retorne verdadeiro 
+// se a lâmpada estiver ligada e falso caso contrário.
+
+modelo Lampada
+inicio do modelo
+    dado tipo;
+    dado voltagem;
+    dado tamanho;
+    dado preço;
+    dado estado;
+
+    operação estaLigada()
+        inicio
+            se (estado == aceso)
+                retorna verdadeiro;
+            senão
+                retorna falso;
+        fim
+
+    operação acender()
+        inicio
+            estado = aceso;
+        fim
+
+    operação apagar()
+        inicio
+            estado = apagado;
+        fim
+
+    operação mostrarEstado()
+        inicio
+            se (estaLigada())
+                imprime "A lâmpada está acesa";
+            senão
+                imprime "A lâmpada está apagada";
+        fim
+
+    operação status()
+        inicio
+            imprime "Dados da Lâmpada";
+            imprime "Voltagem: ";
+            imprime voltagem;
+            imprime "Tamanho: "
+            imprime tamanho;
+            imprime "Preço: ";
+            imprime preço;
+            mostrarEstado();
+        fim
+fim do modelo
