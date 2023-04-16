@@ -1,0 +1,56 @@
+// Projete e implemente um modelo para representar uma lâmpada a venda em um supermercado. 
+// Que dados devem ser representados por este modelo? Que operações este modelo deve realizar?
+
+// - Atributos
+
+// tipo
+// voltagem
+// tamanho
+// preço
+// estado
+
+// - Métodos
+
+// acender()
+// apagar()
+// mostrarEstado()
+// status()
+
+modelo Lampada
+inicio do modelo
+    dado tipo;
+    dado voltagem;
+    dado tamanho;
+    dado preço;
+    dado estado;
+
+    operação acender()
+        inicio
+            estado = aceso;
+        fim
+
+    operação apagar()
+        inicio
+            estado = apagado;
+        fim
+
+    operação mostrarEstado()
+        inicio
+            se (estado == aceso)
+                imprime "A lâmpada está acesa";
+            senão
+                imprime "A lâmpada está apagada";
+        fim
+
+    operação status()
+        inicio
+            imprime "Dados da Lâmpada";
+            imprime "Voltagem: ";
+            imprime voltagem;
+            imprime "Tamanho: "
+            imprime tamanho;
+            imprime "Preço: ";
+            imprime preço;
+            mostrarEstado();
+        fim
+fim do modelo
