@@ -1,0 +1,52 @@
+// Imagine uma lâmpada que possa ter três estados: apagada, acesa e meia-luz. 
+// Usando o modelo Lampada (Exercício 1) como base, escreva o modelo LampadaTresEstados.
+
+modelo LampadaTresEstados
+inicio do modelo
+    dado tipo;
+    dado voltagem;
+    dado tamanho;
+    dado preço;
+    dado éMeiaLuz;
+    dado estado;
+
+    operação acender()
+        inicio
+            estado = aceso;
+        fim
+
+    operação apagar()
+        inicio
+            estado = apagado;
+        fim
+
+    operação meiaLuz()
+        inicio
+            se (éMeiaLuz)
+                estado = meia-luz;
+            senão
+                imprime "A lâmpada não é do tipo meia-luz";
+        fim
+
+    operação mostrarEstado()
+        inicio
+            se (estado == aceso)
+                imprime "A lâmpada está acesa";
+            senão  se (estado == apagado)
+                imprime "A lâmpada está apagada";
+            senão
+                imprime "A lâmpada está em meia-luz";
+        fim
+
+    operação status()
+        inicio
+            imprime "Dados da Lâmpada";
+            imprime "Voltagem: ";
+            imprime voltagem;
+            imprime "Tamanho: "
+            imprime tamanho;
+            imprime "Preço: ";
+            imprime preço;
+            mostrarEstado();
+        fim
+fim do modelo
