@@ -1,0 +1,70 @@
+// Generalize o modelo LampadaTresEstados do exercício 2 para que ele possa representar uma lâmpada onde 
+// a luminosidade pode ser ajustada com qualquer valor entre 0% (apagada) e 100% (acesa).
+
+modelo LampadaTresEstados
+inicio do modelo
+    dado tipo;
+    dado voltagem;
+    dado tamanho;
+    dado preço;
+    dado lumin;    // luminosidade
+    dado estado;
+    
+    operação mudarEstado()
+        inicio
+          se (lumin == 100)
+                estado = aceso;
+            senão se (lumin == 0)
+                estado = apagado;
+            senão 
+                estado = meia-luz;
+        fim
+
+    operação aumentaLuz() 
+        inicio
+            se (lumin < 100)
+                inicio
+                    lumin = lumin + 1;
+                    mudarEstado();
+                fim
+        fim
+    
+    operação diminuiLuz()
+        inicio
+            se (lumin > 0)
+                inicio
+                    lumin = lumin - 1;
+                    mudarEstado();
+                fim
+        fim
+    
+    operação defineLuz(quant)
+        inicio
+            lumin = quant;
+            mudarEstado();
+        fim
+    
+    operação mostrarEstado()
+        inicio
+            se (estado == aceso)
+                imprime "A lâmpada está acesa";
+            senão  se (estado == apagado)
+                imprime "A lâmpada está apagada";
+            senão
+                imprime "A lâmpada está em meia-luz";
+        fim
+
+    operação status()
+        inicio
+            imprime "Dados da Lâmpada";
+            imprime "Voltagem: ";
+            imprime voltagem;
+            imprime "Tamanho: "
+            imprime tamanho;
+            imprime "Preço: ";
+            imprime preço;
+            imprime "Luminosidade: ";
+            imprime lumin;
+            mostrarEstado();
+        fim
+fim do modelo
