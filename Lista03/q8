@@ -1,0 +1,46 @@
+// Baseado no modelo Data e HoraAproximada do exercício 7, crie o modelo HoraPrecisa, 
+// que represente uma hora qualquer com precisão de centésimos de segundo (horas, minutos, 
+//segundos, centésimos de segundo). Que dados e operações este modelo deve ter? Que dados 
+// e operações podem ser usados do modelo HoraAproximada?
+
+
+modelo HoraPrecisa
+inicio do modelo
+    dado hora;
+    dado min;
+    dado seg;
+    dado centesimosDeSeg;
+
+    horaÉvalida(h, m, s, cS)
+        inicio
+            se ((h >= 0 e h <= 23) e (m >= 0 e m <= 60) e 
+                (s >= 0 e s <= 60) e (cS >= 0 e cS <= 99))
+                retorna verdadeiro;
+            retorna falso;
+        fim
+
+    inicializaHora(h, m, s, cS)
+        inicio
+            se (horaÉvalida)
+                inicio
+                    hora = h;
+                    min = m;
+                    seg = s;
+                    centesimosDeSeg = cS;
+                fim
+            senão
+                hora = min = seg = centesimosDeSeg = 0;
+        fim
+
+    mostraHora()
+        inicio
+            imprime hora;
+            imprime ":";
+            imprime min;
+            imprime ":";
+            imprime seg;
+            imprime ":";
+            imprime centesimosDeSeg;
+        fim
+
+fim do modelo
