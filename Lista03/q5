@@ -13,10 +13,10 @@ inicio do modelo
             nomeCorrentista = nome;
             contaÉespecial = especial;
 
-            se (deposito < 0)
-                saldo = 0.0;
-            senão
+            se (deposito >= 0)
                 saldo = deposito;
+            senão
+                saldo = 0.0;
         fim
 
     operação abreContaSimples(nome)
@@ -33,10 +33,8 @@ inicio do modelo
 
     operação retira(valor)
         inicio
-            se (contaÉespecial)
+            se (contaÉespecial ou (valor <= saldo))
                 saldo = saldo - valor;
-            senão se (valor <= saldo)
-                    saldo = saldo - valor;
         fim
 
     operação mostraDados()
