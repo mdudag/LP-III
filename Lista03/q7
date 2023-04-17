@@ -1,0 +1,38 @@
+// Crie o modelo HoraAproximada, que representa uma hora qualquer 
+// (usando valores para representar horas e minutos). Que dados e 
+// operações este modelo deve ter?
+
+modelo HoraAproximada
+inicio do modelo
+    dado hora;
+    dado min;
+    dado seg;
+
+    horaÉvalida(h, m, s)
+        inicio
+            se ((h >= 0 e h <= 23) e (m >= 0 e m <= 60) e (s >= 0 e s <= 60))
+                retorna verdadeiro;
+            retorna falso;
+        fim
+
+    inicializaHora(h, m, s)
+        inicio
+            se (horaÉvalida)
+                inicio
+                    hora = h;
+                    min = m;
+                    seg = s;
+                fim
+            senão
+                hora = min = seg = 0;
+        fim
+
+    mostraHora()
+        inicio
+            imprime hora;
+            imprime ":";
+            imprime min;
+            imprime ":";
+            imprime seg;
+        fim
+fim do modelo
