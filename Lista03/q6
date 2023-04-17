@@ -1,0 +1,56 @@
+// A operação abreConta do modelo ContaBancariaSimplificada (Exercício 5) para que, caso
+// o saldo negativo, uma mensagem de alerta seja impressa. Considere que o saldo só
+// poderá ser negativo se a conta for especial.
+
+modelo ContaBancariaSimplificada
+inicio do modelo
+    dado nomeCorrentista;
+    dado saldo;
+    dado contaÉespecial;
+
+    operação abreConta(nome, deposito, especial)
+        inicio
+            nomeCorrentista = nome;
+            contaÉespecial = especial;
+            saldo = deposito;
+            
+            se (saldo < 0)
+                inicio
+                  se (contaÉespecial)
+                      imprime "Aviso! Saldo negativo!!!";
+                  senão
+                      saldo = 0.0;
+                fim
+        fim
+
+    operação abreContaSimples(nome)
+        inicio
+            nomeCorrentista = nome;
+            saldo = 0.0;
+            contaÉespecial = falso;
+        fim
+
+    operação deposita(valor)
+        inicio
+            saldo = saldo + valor;
+        fim
+
+    operação retira(valor)
+        inicio
+            se (contaÉespecial ou (valor <= saldo))
+                saldo = saldo - valor;
+        fim
+
+    operação mostraDados()
+        inicio
+            imprime "O nome do correntista é: ";
+            imprime nomeCorrentista;
+            imprime "O saldo é: ";
+            imprime saldo;
+            
+            se (contaÉespecial)
+                imprime "A conta é especial";
+            senão 
+                imprime "A conta é comum";
+        fim
+fim do modelo
