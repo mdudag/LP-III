@@ -1,0 +1,30 @@
+// Crie um modelo para representar uma linha, criado pela união de dois pontos no
+//espaço cartesiano de duas dimensões, usando o modelo do Exercício 12. Que dados e
+// operações este modelo deve ter?
+
+modelo Linha
+inico do modelo
+    dado x;
+    dado y;
+    dado m;
+    dado n;
+
+    operação distanciaEntrePontos()
+        inicio
+            retorna ((m-x) * (m-x)) + ((n-y) * (n-y));
+        fim
+
+    operação mostraLinha()
+        inicio
+            imprime "Ponto A(";
+            imprime x;
+            imprime ", ";
+            imprime y;
+            imprime ")";
+            imprime "Ponto B(";
+            imprime m;
+            imprime ", ";
+            imprime n;
+            imprime ")";
+        fim
+fim do modelo
