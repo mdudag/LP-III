@@ -1,0 +1,12 @@
+// Crie um modelo Livro que represente os dados básicos de um livro sem se preocupar com sua finalidade.
+
+modelo Livro
+inicio do modelo
+    dado titulo;
+    dado autor;
+    dado genero;
+    dado vol;               // volume do livro
+    dado edicao;
+    dado tamanho;
+    dado quantPag; 
+fim do modelo
