@@ -1,0 +1,61 @@
+// Modifique a operação dataÉVálida do modelo Data (Exercício 7) para que esta considere o valor máximo que pode 
+// ser aceito como válido dependendo do mês, de forma que para meses com 30 dias, o valor 31 para o dia seja 
+// considerado incorreto, e que para fevereiro o valor máximo seja calculado em função do ano ser bissexto ou não.
+
+
+modelo Data
+inicio do modelo
+    dado dia;
+    dado mes;
+    dado ano;
+
+    operação dataÉvalida(d, m, a)
+        inicio
+            // Caso seja um ano bissexto, o mês 2 tem um dia a mais
+            se ((a%4 == 0) e (a%100 == 0) e (a%400 == 0)) 
+                inicio
+                    se ((m == 2) e (d >= 1) e (d <= 29))
+                        retorna verdadeiro;
+                fim
+
+            se ((m == 2) e (d >= 1) e (d <= 28))
+                retorna verdadeiro;
+
+            // Meses diferentes de 2
+            se ((m >= 1) e (m <= 12))
+                inicio
+                    // Meses com 31 dias: 1, 3, 5, 7, 8, 10, 12
+                    se ((m <= 7) e (m%2 != 0) ||
+                        (m >= 8) e (m%2 == 0))
+                        se ((d <= 1) e (d >= 31))
+                            retorna verdadeiro;
+                    // Meses com 30 dias são os restantes, menos o mês 2
+                    senão
+                        se ((d <= 1) e (d >= 30))
+                            retorna verdadeiro;
+                fim
+                
+            retorna falso;
+        fim
+
+    operação inicializaData(d, m, a)
+        inicio
+            se (dataÉvalida)
+                inicio
+                    dia = d;
+                    mes = m;
+                    ano = a;
+                fim
+            senão
+                dia = mes = ano = 0;
+        fim
+
+    operação mostraData()
+        inicio
+            imprime dia;
+            imprime "/";
+            imprime mes;
+            imprime "/";
+            imprime ano;
+        fim
+fim do modelo
