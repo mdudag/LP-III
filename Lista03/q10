@@ -1,0 +1,109 @@
+// Partindo do resultado do Exercício 9, crie um modelo LivroDeLivraria que represente
+// os dados e operações básicas de um livro que está à venda em uma livraria.
+
+modelo LivroDeLivraria
+inicio do modelo
+    dado titulo;
+    dado autor;
+    dado genero;
+    dado vol;               // volume do livro
+    dado edicao;
+    dado tamanho;
+    dado quantPag; 
+    dado livroAberto;
+    dado pagAtual;
+    dado preço; 
+
+    operação estadoLivro()
+        inicio
+            se (livroAberto)
+                imprime "O livro está aberto";
+                imprime "Página atual: ";
+                imprime pagAtual;
+            senão 
+                imprime "O livro está fechado";
+        fim
+
+    operação abrir()
+        inicio
+            livroAberto = verdadeiro;
+        fim
+
+    operação fechar()
+        inicio
+            livroAberto = falso;
+        fim
+
+    operação ler()
+        inicio
+            se (livroAberto)
+                imprime "Lendo...";
+            senão
+                imprime "Erro! O livro está fechado!!";
+        fim
+
+    operação avançarPag()
+        inicio
+            se (livroAberto)
+                inicio
+                    se (pagAtual != quantPag)
+                        pagAtual = pagAtual + 1;
+                    senão
+                        imprime "O livro já se encontra na última página!";
+                fim
+            senão
+                imprime "Erro! Livro fechado!";
+
+        fim
+
+    operação voltarPag()
+        inicio
+            se (livroAberto)
+                inicio
+                    se (pagAtual != 0)
+                        pagAtual = pagAtual - 1;
+                    senão
+                        imprime "O livro já se encontra na primeira página!";
+                fim
+            senão
+                imprime "Erro! Livro fechado!";
+        fim
+
+    operação irParaPag(pag)
+        inicio
+            se (livroAberto)
+                pagAtual = pag;
+            senão
+                imprime "Erro! Livro fechado!";
+        fim
+
+    operação status()
+        inicio
+            imprime "Dados do livro";
+            imprime "Título: ";
+            imprime titulo;
+
+            imprime "Autor: ";
+            imprime autor;
+
+            imprime "Gênero: ";
+            imprime genero;
+
+            imprime "Volume: ";
+            imprime vol;
+
+            imprime "Edição: ";
+            imprime edicao;
+
+            imprime "Tamanho: ";
+            imprime tamanho;
+
+            imprime "Quantidades de Páginas: ";
+            imprime quantPag;
+
+            estadoLivro();
+
+            imprime "Este livro custa R$";
+            imprime preço;
+        fim
+fim do modelo
