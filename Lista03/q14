@@ -1,0 +1,35 @@
+// Crie um modelo para representar um retângulo, cujos pontos opostos sejam instâncias
+// do modelo Ponto2D (Exercício 12). Que dados e operações este modelo deve ter?
+
+modelo Retangulo
+inicio do modelo
+    inicio
+        Ponto2D ponto1 = novo Ponto2D();
+        Ponto2D ponto2 = novo Ponto2D();
+        Ponto2D ponto3 = novo Ponto2D();
+        Ponto2D ponto4 = novo Ponto2D();
+
+        operação calculaArea()
+            inicio
+                retorna (ponto1.distanciaEntrePontos(ponto2.x, ponto2.y)) * (ponto2.distanciaEntrePontos(ponto3.x, ponto3.y));
+            fim
+
+        operação calculaPerimetro()
+            inicio
+                retorna (ponto1.distanciaEntrePontos(ponto2.x, ponto2.y)) + (ponto2.distanciaEntrePontos(ponto3.x, ponto3.y)) + 
+                (ponto3.distanciaEntrePontos(ponto4.x, ponto4.y)) + (ponto4.distanciaEntrePontos(ponto1.x, ponto1.y))
+            fim
+        
+        operação mostraLados()
+            inicio
+                imprime "Lado 1: ";
+                imprime ponto1.distanciaEntrePontos(ponto2.x, ponto2.y);
+                imprime "Lado 2: ";
+                imprime ponto2.distanciaEntrePontos(ponto3.x, ponto3.y);
+                imprime "Lado 3: ";
+                imprime ponto3.distanciaEntrePontos(ponto4.x, ponto4.y);
+                imprime "Lado 4: ";
+                imprime ponto4.distanciaEntrePontos(ponto1.x, ponto1.y);
+            fim
+    fim
+fim do modelo
