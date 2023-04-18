@@ -1,0 +1,44 @@
+// Crie um modelo Ponto2D para representar um ponto no espaço cartesiano de duas
+// dimensões. Que dados e operações este modelo deve ter? Suponha um gráfico no qual
+// você tenha que desenhar pontos usando este modelo.
+
+modelo Ponto2D
+inicio do modelo
+    dado x;
+    dado y;
+
+    operação distanciaEntrePontos(m, n)
+        inicio
+            retorna ((x-m) * (x-m)) + ((y-n) * (y-n));
+        fim
+
+    operação mostrarQuadrante() 
+        inicio
+            se (x > 0)
+                inicio
+                    se (y > 0)
+                        imprime "Primeiro Quadrante";
+                    senão
+                        imprime "Quarto Quadrante";
+                fim
+            senão se (x < 0)
+                inicio
+                    se (y > 0)
+                        imprime "Segundo Quadrante";
+                    senão
+                        imprime "Terceiro Quadrante";
+                fim
+            senão
+                imprime "O ponto se encontra no eixo";
+        fim
+
+    operação mostrarPonto()
+        inicio
+            imprime "Ponto P(";
+            imprime x;
+            imprime ", ";
+            imprime y;
+            imprime ")";
+        fim
+
+fim do modelo
