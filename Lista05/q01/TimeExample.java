@@ -28,7 +28,7 @@ public class TimeExample {
     
     TimeAsInt time4 = new TimeAsInt(22, 55, 20);
 
-    System.out.printf("\n\t--- Hora com Inteiro ---\n");
+    System.out.printf("\n\t--- Hora como Inteiro ---\n");
     System.out.printf("\nHora: ");
     time4.prnTime();
     System.out.println("A hora informada é antes de 12:00? " + time4.isAm());
