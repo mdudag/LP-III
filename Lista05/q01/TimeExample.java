@@ -1,4 +1,4 @@
-public class TimeExample {
+ public class TimeExample {
   public static void main(String[] args) {
     TimeConventional time1 = new TimeConventional(22, 55, 20);
 
