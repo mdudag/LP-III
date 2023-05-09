@@ -36,14 +36,14 @@ public class TimeConventional {
   }
 
   private boolean validateHour(int hora) {
-    if((hora>=0) && (hora<=24))
+    if((hora>=0) && (hora<=23))
       return true;
     
     return false;
   }
 
   private boolean validateMinOrSec(int param) {
-    if((param>=0) && (param<=60))
+    if((param>=0) && (param<60))
       return true;
       
     return false;
@@ -55,6 +55,8 @@ public class TimeConventional {
     
     return false;
   }
+
+  // ---------------------------------
 
   public int cron(TimeConventional outraHora) {
     int segs = cronHora(outraHora.getHora(), outraHora.getMin())
@@ -68,14 +70,20 @@ public class TimeConventional {
     // Distância entre as horas
     int h = (outraHora - hora);
 
-    // Verifica se a diferença dos minutos é negativa
-    if (verificaCronSegOuMinNeg(min, outroMin))
-      h--;
-
     // Se as horas forem no mesmo dia
-    if (hora <= outraHora)
+    if (hora <= outraHora) { 
+      // Verifica se a diferença dos minutos é negativa
+      if (verificaCronSegOuMinNeg(min, outroMin))
+        h--;
+      
       // Retorna a hora em segundos
       return  h * 3600;
+    }
+
+    // Verifica se a diferença dos minutos é negativa
+    if (verificaCronSegOuMinNeg(min, outroMin))
+      h++;   // Ocorre o incremento pois o cálculo está invertido
+             // Isso é resolvido na linha abaixo
 
     // Retorna a hora em segundos
     return (24 - Math.abs(h)) * 3600;
@@ -85,14 +93,20 @@ public class TimeConventional {
     // Distância entre os minutos
     int m = (outroMin - min);
 
-    // Verifica se a diferença dos segundos é negativa
-    if (verificaCronSegOuMinNeg(seg, outroSeg))
-      m--;
-
     // Se o valor do minuto for positivo
-    if (m >= 0) 
+    if (m >= 0) {
+      // Verifica se a diferença dos segundos é negativa
+      if (verificaCronSegOuMinNeg(seg, outroSeg))
+        m--;
+      
       // Retorna os minutos em segundos
       return m * 60;
+    }
+    
+    // Verifica se a diferença dos segundos é negativa
+    if (verificaCronSegOuMinNeg(seg, outroSeg))
+      m++;    // Ocorre o incremento pois o cálculo está invertido
+              // Isso é resolvido na linha abaixo
 
     // Retorna os minutos em segundos
     return (60 - Math.abs(m)) * 60;
@@ -119,37 +133,47 @@ public class TimeConventional {
     return false;
   }
 
+  // ---------------------------------
+
+
   public void addSeconds(int segs) {
     int horaEmSeg = 3600;
     int minEmSeg = 60;
-    int aux = segs + seg;
+    int incrTime = segs / horaEmSeg;
 
-    if ((aux / horaEmSeg) != 0) {
-      hora += (segs / horaEmSeg);
+    if (incrTime != 0) {
+      hora += incrTime;
       segs %= horaEmSeg;
-      aux = segs + seg;
+      incrTime = segs / minEmSeg;
     }
     
-    if ((aux / minEmSeg) != 0) {
-      min += (segs / minEmSeg);
+    if (incrTime != 0) {
+      min += incrTime;
       segs %= minEmSeg;
-      aux = segs + seg;
     }
 
+    // Se o valor dos segundos for inválido, no caso maior que 59
     if (validateMinOrSec(seg + segs) == false) {
       min++;
-      seg = aux % minEmSeg;
+      
+      // Atribui aos segundos seu valor correto
+      seg += segs - 60;
 
-      if (min >= minEmSeg) {
+      // Se o valor dos minutos for inválido, no caso maior que 59
+      if (validateMinOrSec(min) == false) {
         hora++;
+        
+       // Atribui aos minutos seu valor correto
         min -= minEmSeg; 
       }
     }
+      
+    // Apenas incrementa os segundos
     else 
       seg += segs;
 
     if (hora > 23) 
-      hora = (hora % 23) - 1;
+      hora -= 24;
   }
 
   public String getTime() {
