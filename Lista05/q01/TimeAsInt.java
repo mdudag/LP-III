@@ -12,12 +12,12 @@ public class TimeAsInt {
       this.value = 0;
   }
 
-  private boolean validateTime(int timeValue) {
-    return ((timeValue>0) && (timeValue<86401)); //SegundosEmUmDia = 24*60*60 = 86400 
-  }
-
   private int TimeToSeconds(int hora, int min, int sec) {
     return hora*3600 + min*60 + sec;
+  }
+
+  private boolean validateTime(int timeValue) {
+    return ((timeValue>=0) && (timeValue<86400)); //SegundosEmUmDia = 24*60*60 = 86400 
   }
 
   private String SecondsToTime() {
@@ -30,7 +30,7 @@ public class TimeAsInt {
     min = (value % 3600)/60;
     sec = (value % 3600)%60;
 
-    if (hora > 24)
+    if (hora >= 24)
       hora -= 24;
 
     result = Integer.toString(hora) + ":"
@@ -41,8 +41,10 @@ public class TimeAsInt {
   }
 
   public boolean isAm() {
-    if ((value/3600) < 12) 
-      return true;
+    int aux = value/3600;
+    
+    if (aux > 24) aux -= 24;
+    if (aux < 12) return true;
 
     return false;
   }
@@ -53,7 +55,7 @@ public class TimeAsInt {
     if (value <= outroValue.value) 
       return aux;
 
-    return ((24 * 3600) - Math.abs(aux));
+    return (24 * 3600) - Math.abs(aux);
   }
 
   public void addSeconds(int secs) {
