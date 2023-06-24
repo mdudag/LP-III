@@ -24,10 +24,12 @@ public class Circulo extends Shape2D {
                "\nRaio: " + reta;
     }
 
+    @Override
     public float calculaArea() {
         return (float) (Math.PI*reta*reta);
     }
 
+    @Override
     public float calculaPerimetro() {
         return (float) (2*Math.PI*reta);
     }
