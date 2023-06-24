@@ -47,11 +47,13 @@ public class Retangulo extends Shape2D {
                "\nBase: " + reta +
                "\nAltura: " + reta2;
     }
-    
+
+    @Override
     public float calculaArea() {
         return reta*reta2;
     }
 
+    @Override
     public float calculaPerimetro() {
         return 2*(reta+reta2);
     }
