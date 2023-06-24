@@ -22,10 +22,12 @@ public class Quadrado extends Shape2D {
                "\nLado: " + reta;
     }
 
+    @Override
     public float calculaArea() {
         return reta*reta;
     }
 
+    @Override
     public float calculaPerimetro() {
         return 4*reta;
     }
