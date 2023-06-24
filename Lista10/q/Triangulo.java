@@ -55,10 +55,12 @@ public class Triangulo extends Shape2D {
                "\nLado 3: " + reta3;
     }
 
+    @Override
     public float calculaArea() {
         return reta*reta2/2;
     }
 
+    @Override
     public float calculaPerimetro() {
         return 3*reta;
     }
