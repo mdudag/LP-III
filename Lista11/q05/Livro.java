@@ -1,7 +1,5 @@
 package q05;
 
-import q01.Triangulo;
-
 public class Livro {
     protected String titulo;
     protected String autor;
