@@ -3,8 +3,8 @@ package q02;
 import java.lang.Math;
 
 public class Circulo implements Shape2D {
-    private Ponto2D p;
-    private float raio;
+    protected Ponto2D p;
+    protected float raio;
 
     public Circulo(float x, float y, float r)  {
         if (validaCirculo(r)) {
