@@ -10,8 +10,9 @@ public class ProjetoJogo {
         JogoTabuleiro jogo = new JogoTabuleiro(tab1, tab2);
         jogo.iniciarJogo();
         //System.out.println("j1: " +  tab1.jogador + " - j2: " +  tab2.jogador);
-        System.out.println("\n  --- Tabuleiro dos Jogadores ---");
-        jogo.mostrarTabuleiroDoJogo(1, -1, 0);
+        // System.out.println("\n  --- Tabuleiro dos Jogadores ---\n");
+        // jogo.mostrarTabuleiroDoJogo(1, 0);
+        MetodoStatic.systemPause(); MetodoStatic.limpaTela();
         jogo.jogar();
     }
 }
