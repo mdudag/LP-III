@@ -7,7 +7,7 @@ abstract public class Desconhecido {
         quantAjudas = 0;
     }
 
-    public void pedirAjuda() {
+    public int pedirAjuda() {
         int i = MetodoStatic.getNumAleatorio(0, 1);
 
         System.out.println("Deseja ajudar?" + 
@@ -15,7 +15,7 @@ abstract public class Desconhecido {
                            "\n  2 - Ignorar");
         int resp = MetodoStatic.resposta();
 
-        tipoDeDesconhecido(i, resp);
+        return tipoDeDesconhecido(i, resp);
     }
 
     public void desenhoDesconhecido() {
@@ -31,17 +31,22 @@ abstract public class Desconhecido {
         System.out.println("\t \\'._____,'/");
     }
 
-    public void tipoDeDesconhecido(int tipo, int resp) {
+    public int tipoDeDesconhecido(int tipo, int resp) {
+        int aux=0;
+        
         switch (resp) {
         case 1: 
             int i = MetodoStatic.getNumAleatorio(10, 50);
+            
 
-            if (tipo==0) ladrao(i);
-            else         pessoaFerida(i);
+            if (tipo==0) aux =  ladrao(i);
+            else         aux =  pessoaFerida(i);
 
-            if (++quantAjudas == 3) 
+            if (++quantAjudas == 3) {
                 System.out.println("\n+ VOCÊ GANHOU 50 MOEDAS!! +" +
                                    "\nRecompensa por escolher ajudar o desconhecido três vezes!");
+                aux += 50;
+            }
         
             break;
 
@@ -56,7 +61,8 @@ abstract public class Desconhecido {
         }
 
         System.out.println("\nSiga seu trajeto...");
-        MetodoStatic.systemPause();
+
+        return aux;
     }
 
     public void desenhoArvore() {
@@ -75,15 +81,18 @@ abstract public class Desconhecido {
         MetodoStatic.systemPause();
     }
 
-    private void ladrao(int moedasPerdidas) {
+    private int ladrao(int moedasPerdidas) {
         System.out.println("\nQue azar, o desconhecido não era uma pessoa ferida!" +
                            "\nEle levou " + moedasPerdidas + " moedas, mas não desanime.");
+        return moedasPerdidas;
     }
     
-    private void pessoaFerida(int moedasGanhas) {
+    private int pessoaFerida(int moedasGanhas) {
         System.out.print("\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\n");
         historia();
         System.out.println("\nBoa notícia, você foi recompensado com " + moedasGanhas + " moedas.");
+
+        return moedasGanhas;
     }
 
     abstract public void historia();
