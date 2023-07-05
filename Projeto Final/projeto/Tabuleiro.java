@@ -6,35 +6,24 @@ import java.util.Scanner;
 import projeto.PrintTabuleiro;
 
 public class Tabuleiro extends PrintTabuleiro {
-    //protected ArrayList<Local[]> caminhos;    // Composição?
     protected Local local;
     protected String jogador;
     protected int moedas;
     protected int localAnterior;
 
     public Tabuleiro(String jogador) {
-        // Inicializando atributo da classe PrintTabuleiro
         super();
 
         this.jogador = jogador;
         moedas = localAnterior = 0;
         local = new Local();
-        // caminhos = new ArrayList<Local[]>();
-
-        // Inicializando os componentes do array
-        // for (int i=0; i<9; i++) {
-        //     caminhos.add(new Local[i+1]);
-
-        //     for(int j=0; j<=i; j++) 
-        //         caminhos.get(i)[j] = new Local();
-        // }
     }
 
     public Tabuleiro() {
         this("Jogador");
     }
 
-    // Método Getter e Setter
+    // ---------------------------------------------------
 
     public String getJogador() {
         return jogador;
@@ -44,107 +33,131 @@ public class Tabuleiro extends PrintTabuleiro {
         jogador = j;
     } 
 
-    // public ArrayList<Local[]> getCaminhos() {
-    //     return caminhos;
-    // }
-
     public Local getLocal() {
         return local;
     }
 
-    // Outros Métodos
+    // ---------------------------------------------------
 
-    public void nivelAtual(int direcao, short nivelAtual) {
+    public int nivelAtual(int direcao, short nivelAtual, int moedasAdv) {
         switch(nivelAtual) {
-            case 0: nivel0();        break;
-            case 1: nivel1(direcao); break;
-            case 2: nivel2(direcao); break;
-            case 3: nivel3(direcao); break;
-            case 4: nivel4(direcao); break;
-            case 5: nivel5(direcao); break;
-            case 6: nivel6(direcao); break;
-            case 7: nivel7(direcao); break;
-            case 8: nivel8(direcao); break;
+            case 0: return nivel0()+moedas;        
+            case 1: return nivel1(direcao)+moedas; 
+            case 2: return nivel2(direcao, moedasAdv)+moedas; 
+            case 3: return nivel3(direcao, moedasAdv)+moedas; 
+            case 4: return nivel4(direcao, moedasAdv)+moedas; 
+            case 5: return nivel5(direcao, moedasAdv)+moedas; 
+            case 6: return nivel6(direcao, moedasAdv)+moedas; 
+            case 7: return nivel7(direcao, moedasAdv)+moedas; 
+            case 8: return nivel8(direcao, moedasAdv)+moedas; 
             default: 
                 System.out.println("\nErro! Esse nível não existe.");
+                return 0;
         }
     }
 
-    protected void nivel0() {
-        // Local local0 = caminhos.get(0)[0];
-        System.out.println("entrou nivel 0");
-        printTabuleiro(0, 0);
-        //int aux = local0.ganhaQuatroMoedas(jogador);
+    protected int nivel0() {
+        printTabuleiro();
         System.out.println("\n\nAmbos os jogadores ganharam 10 moedas!");
-        //local0.systemPause();
-        //return aux;
+        return 10;
     }
 
-    protected void nivel1(int direcao) {
-        // Local local1 = caminhos.get(1)[direcao];
-        
-        //local1.ganhaQuatroMoedas();
-        //local1.systemPause();
+    protected int nivel1(int direcao) {
         printTabuleiro(1, direcao);
-        System.out.println("\n\nVocê ganhou 4 moedas!!");
-        //System.out.println("entrou nivel 1");
+
+        switch (direcao) {
+            case 0: return local.ganhaQuatroMoedas(jogador);
+            default: local.localVazio(); return 0;
+        }
     }
 
-    protected void nivel2(int direcao) {
-        // Local local2 = caminhos.get(2)[direcao];
-        //local2.ganhaQuatroMoedas();
-        // local2.systemPause();
+    protected int nivel2(int direcao, int moedasAdv) {
         printTabuleiro(2, direcao);
-        System.out.println("\n\nVocê ganhou 4 moedas!!");
-        //System.out.println("entrou nivel 2");
+        
+        switch(direcao) {
+            case 0: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv); 
+            case 1: return local.lagoNoCaminho(MetodoStatic.getNumAleatorio(0, 1)); 
+            default: return local.ganhaQuatroMoedas(jogador); 
+        }
     }
 
-    protected void nivel3(int direcao) {
-        // Local local3 = caminhos.get(3)[direcao];
-        //local3.ganhaQuatroMoedas();
-        // local3.systemPause();
+    protected int nivel3(int direcao, int moedasAdv) {
         printTabuleiro(3, direcao);
-        System.out.println("\n\nVocê ganhou 4 moedas!!");
-        //System.out.println("entrou nivel 3");
+
+        switch(direcao) {
+            case 0: local.localVazio(); return 0;
+            case 1: return local.desconhecidoNoCaminho(MetodoStatic.getNumAleatorio(0, 1));
+            case 2: return local.ganhaQuatroMoedas(jogador);
+            default: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
+        }
     }
 
-    protected void nivel4(int direcao) {
-        // Local local4 = caminhos.get(4)[direcao];
-        //local4.ganhaQuatroMoedas();
-        // local4.systemPause();
+    protected int nivel4(int direcao, int moedasAdv) {
         printTabuleiro(4, direcao);
-        System.out.println("\n\nVocê ganhou 4 moedas!!");
+
+        switch(direcao) {
+            case 0: case 1: return local.ganhaQuatroMoedas(jogador);
+            case 2: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
+            case 3: return local.lagoNoCaminho(MetodoStatic.getNumAleatorio(0, 1));
+            default: local.localVazio(); return 0;
+        }
     }
 
-    protected void nivel5(int direcao) {
-        // Local local5 = caminhos.get(5)[direcao];
-        //local5.ganhaQuatroMoedas();
-        // local5.systemPause();
+    protected int nivel5(int direcao, int moedasAdv) {
         printTabuleiro(5, direcao);
-        System.out.println("\n\nVocê ganhou 4 moedas!!");
+
+        switch(direcao) {
+            case 0: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
+            case 1: return local.lagoNoCaminho(MetodoStatic.getNumAleatorio(0, 1));
+            case 2: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
+            case 3: return local.desconhecidoNoCaminho(MetodoStatic.getNumAleatorio(0, 1));
+            case 4: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
+            default: return local.ganhaQuatroMoedas(jogador);
+        }
     }
 
-    protected void nivel6(int direcao) {
-        // Local local6 = caminhos.get(6)[direcao];
-        //local6.ganhaQuatroMoedas();
-        // local6.systemPause();
+    protected int nivel6(int direcao, int moedasAdv) {
         printTabuleiro(6, direcao);
-        System.out.println("\n\nVocê ganhou 4 moedas!!");
+
+        switch(direcao) {
+            case 0: local.localVazio(); return 0;
+            case 1: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
+            case 2: return local.desconhecidoNoCaminho(MetodoStatic.getNumAleatorio(0, 1));
+            case 3: return local.lagoNoCaminho(MetodoStatic.getNumAleatorio(0, 1));
+            case 4: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
+            case 5: return local.lagoNoCaminho(MetodoStatic.getNumAleatorio(0, 1));
+            default: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
+        }
     }
 
-    protected void nivel7(int direcao) {
-        // Local local7 = caminhos.get(7)[direcao];
-        //local7.ganhaQuatroMoedas();
-        // local7.systemPause();
+    protected int nivel7(int direcao, int moedasAdv) {
         printTabuleiro(7, direcao);
-        System.out.println("\n\nVocê ganhou 4 moedas!!");
+
+        switch(direcao) {
+            case 0: return local.lagoNoCaminho(MetodoStatic.getNumAleatorio(0, 1));
+            case 1: return local.ganhaQuatroMoedas(jogador);
+            case 2: return local.ganhaQuatroMoedas(jogador);
+            case 3: return local.lagoNoCaminho(MetodoStatic.getNumAleatorio(0, 1));
+            case 4: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
+            case 5: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
+            case 6: return local.ganhaQuatroMoedas(jogador);
+            default: return local.desconhecidoNoCaminho(MetodoStatic.getNumAleatorio(0, 1));
+        }
     }
 
-    protected void nivel8(int direcao) {
-        // Local local8 = caminhos.get(8)[direcao];
-        //local8.ganhaQuatroMoedas();
-        // local8.systemPause();
+    protected int nivel8(int direcao, int moedasAdv) {
         printTabuleiro(8, direcao);
-        System.out.println("\n\nVocê ganhou 4 moedas!!");
+
+        switch(direcao) {
+            case 0: return local.ganhaQuatroMoedas(jogador);
+            case 1: local.localVazio(); return 0;
+            case 2: return local.lagoNoCaminho(MetodoStatic.getNumAleatorio(0, 1));
+            case 3: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
+            case 4: return local.ganhaQuatroMoedas(jogador);
+            case 5: return local.ganhaQuatroMoedas(jogador);
+            case 6: return local.ganhaQuatroMoedas(jogador);
+            case 7: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
+            default: local.localVazio(); return 0;
+        }
     }
 }
