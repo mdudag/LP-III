@@ -1,15 +1,15 @@
 package projeto;
 
 public class LagoNoCaminho {
-    protected void desenhoDoLago() {
-        System.out.println("\n\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    public void desenhoDoLago() {
+        System.out.println("\n\n\n\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("\t\t   ~      ~  ~    ~  ~     ~      ~  ~   "); 
         System.out.println("\t\t      ~ ~      ~ ~          ~ ~      ~ ~ ");
         System.out.println("\t\t ~         ~        ~ ~        ~      ~  "); 
         System.out.println("\t\t_________________________________________\n");
     }
     
-    protected void darVoltaNoLago() {
+    protected int darVoltaNoLago() {
         System.out.println("\nAndar em volta do lago tem seus perigos, cuidado com ladrões.");
         MetodoStatic.systemPause();
         
@@ -21,16 +21,18 @@ public class LagoNoCaminho {
 
             if (JogoTabuleiro.nivelAtual != 8)
                 System.out.println("Continue jogando para tentar recuperá-las!");
-            }
-            else {
+            return i;
+        }
+        else {
             System.out.println("Você consegiu dar a volta no lago sem problemas! ");
             if (JogoTabuleiro.nivelAtual != 8)
                 System.out.println("Continue seu trajeto.");
             System.out.println();
+            return 0;
         }
     }
 
-    protected void irNadando() {
+    protected int irNadando() {
         System.out.println("\nCuidado com inimigos próximos a você no lago, guarde bem suas moedas.");
         MetodoStatic.systemPause();
         
@@ -42,6 +44,8 @@ public class LagoNoCaminho {
 
             if (JogoTabuleiro.nivelAtual != 8)
                 System.out.println("Continue jogando para tentar recuperá-las!");
+
+            return i;
         }
         else {
             System.out.println("Você consegiu sair do lago sem problemas! ");
@@ -49,10 +53,12 @@ public class LagoNoCaminho {
             if (JogoTabuleiro.nivelAtual != 8)
                 System.out.println("Continue seu trajeto.");
             System.out.println();
+
+            return 0;
         }
     }
 
-    protected void pedirAjudaNoLago() {
+    protected int pedirAjudaNoLago() {
         System.out.println("\nHá alguém com uma canoa");
         desenhoCanoaNoLago();
         System.out.println("Ele irá te ajudar a atravessar o lago, mas pode ser que te cobre por isso...");
@@ -66,19 +72,26 @@ public class LagoNoCaminho {
             if (JogoTabuleiro.nivelAtual != 8)
             System.out.println("Continue jogando.");
             System.out.println();
+
+            return 0;
         }
         else {
             i = MetodoStatic.getNumAleatorio(2, 10);
+
             System.out.println("Finalmente, você chegou do outro lado do lago! Porém perdeu algumas moedas...");
             System.out.println("\n | Moedas perdidas: " + i + " |\n");
+
             if (JogoTabuleiro.nivelAtual != 8)
-            System.out.println("Continue jogando para tentar recuperá-las!");
+                System.out.println("Continue jogando para tentar recuperá-las!");
+            
+            return i;
         }
     }
     
     protected void desenhoCanoaNoLago() {
-        System.out.println("\n\n\t\t                       _________ ");
-        System.out.println("\t\t                       \\ - - - /  ");
-        System.out.println("\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n");
+        System.out.println("\n\n\t\t             O__,");       
+        System.out.println("\t\t         /\\__|\\/_______/\\");
+        System.out.println("\t\t         \\    /         /");
+        System.out.println("\t\t ~~~~^~^~^~^^`~^~^~^~^~~^~^~^~^~^~^~^~^~~~^~^~~~^~^~~");
     }
 }
