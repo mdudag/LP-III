@@ -1,24 +1,18 @@
 package projeto;
 
-import java.util.Scanner;
-import java.lang.Math;
+public class Local {   // Classe de serviços ou utilitária: apresenta apenas métodos
+    private LagoNoCaminho lago;
 
-public class Local {  
-    
-    static Scanner ler = new Scanner(System.in);
-    LagoNoCaminho lago;
-
-    public Local() {
-        lago = new LagoNoCaminho();
-    }
+    public Local() { lago = new LagoNoCaminho(); }
 
     public int ganhaQuatroMoedas(String jogador) {
         System.out.printf("\n\n+-------  %s ganhou 4 moedas!  -------+\n", jogador);
         return 4;
     }
 
-    public void localVazio() {
+    public int localVazio() {
         System.out.println("\n\n === Local vazio, siga em frente. ===");
+        return 0;
     }
 
     public int surpresa(int num, String jogador, int moedas, int moedasAdv) {
@@ -46,7 +40,7 @@ public class Local {
             System.out.println("Você tem duas opções:\n"+
                                "  1 - Dar a volta no lago\n"+
                                "  2 - Pedir ajuda"); 
-            resp = Local.ler.nextInt(); 
+            resp = MetodoStatic.respostaInt(); 
 
             if (resp == 1) return lago.darVoltaNoLago();
             else           return lago.pedirAjudaNoLago(); 
@@ -57,7 +51,7 @@ public class Local {
             System.out.println("Você tem duas opções:\n"+
                                "  1 - Ir nadando\n"+
                                "  2 - Pedir ajuda"); 
-            resp = Local.ler.nextInt(); 
+            resp = MetodoStatic.respostaInt(); 
 
             if (resp == 1) return lago.irNadando();
             else           return lago.pedirAjudaNoLago();
