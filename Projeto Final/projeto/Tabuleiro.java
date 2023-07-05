@@ -1,15 +1,9 @@
 package projeto;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import projeto.PrintTabuleiro;
-
 public class Tabuleiro extends PrintTabuleiro {
     protected Local local;
     protected String jogador;
-    protected int moedas;
-    protected int localAnterior;
+    protected int moedas, localAnterior;
 
     public Tabuleiro(String jogador) {
         super();
@@ -40,20 +34,32 @@ public class Tabuleiro extends PrintTabuleiro {
     // ---------------------------------------------------
 
     public int nivelAtual(int direcao, short nivelAtual, int moedasAdv) {
+        // Os níveis irão modificar a quantidade de moedas do jogador
+
+        int aux=0;
+
         switch(nivelAtual) {
-            case 0: return nivel0()+moedas;        
-            case 1: return nivel1(direcao)+moedas; 
-            case 2: return nivel2(direcao, moedasAdv)+moedas; 
-            case 3: return nivel3(direcao, moedasAdv)+moedas; 
-            case 4: return nivel4(direcao, moedasAdv)+moedas; 
-            case 5: return nivel5(direcao, moedasAdv)+moedas; 
-            case 6: return nivel6(direcao, moedasAdv)+moedas; 
-            case 7: return nivel7(direcao, moedasAdv)+moedas; 
-            case 8: return nivel8(direcao, moedasAdv)+moedas; 
+            case 0: aux = nivel0();                     break;    
+            case 1: aux = nivel1(direcao);              break;
+            case 2: aux = nivel2(direcao, moedasAdv);   break; 
+            case 3: aux = nivel3(direcao, moedasAdv);   break; 
+            case 4: aux = nivel4(direcao, moedasAdv);   break; 
+            case 5: aux = nivel5(direcao, moedasAdv);   break; 
+            case 6: aux = nivel6(direcao, moedasAdv);   break; 
+            case 7: aux = nivel7(direcao, moedasAdv);   break; 
+            case 8: aux = nivel8(direcao, moedasAdv);   break;
             default: 
-                System.out.println("\nErro! Esse nível não existe.");
-                return 0;
+                System.out.println("\nErro! Esse nível não existe."); break;
+
         }
+
+        // Incrementando as moedas ganhas
+        moedas+=aux;
+
+        // O valor conseguido no nível é retornado caso seja necessário
+        // em algum momento, como para mandar o valor para o adversário
+        // no método mostraTabuleiroDoJogo da classe Tabuleiro
+        return aux;
     }
 
     protected int nivel0() {
@@ -67,7 +73,7 @@ public class Tabuleiro extends PrintTabuleiro {
 
         switch (direcao) {
             case 0: return local.ganhaQuatroMoedas(jogador);
-            default: local.localVazio(); return 0;
+            default: return local.localVazio();
         }
     }
 
@@ -85,7 +91,7 @@ public class Tabuleiro extends PrintTabuleiro {
         printTabuleiro(3, direcao);
 
         switch(direcao) {
-            case 0: local.localVazio(); return 0;
+            case 0: return local.localVazio();
             case 1: return local.desconhecidoNoCaminho(MetodoStatic.getNumAleatorio(0, 1));
             case 2: return local.ganhaQuatroMoedas(jogador);
             default: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
@@ -99,7 +105,7 @@ public class Tabuleiro extends PrintTabuleiro {
             case 0: case 1: return local.ganhaQuatroMoedas(jogador);
             case 2: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
             case 3: return local.lagoNoCaminho(MetodoStatic.getNumAleatorio(0, 1));
-            default: local.localVazio(); return 0;
+            default: return local.localVazio();
         }
     }
 
@@ -120,7 +126,7 @@ public class Tabuleiro extends PrintTabuleiro {
         printTabuleiro(6, direcao);
 
         switch(direcao) {
-            case 0: local.localVazio(); return 0;
+            case 0: return local.localVazio();
             case 1: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
             case 2: return local.desconhecidoNoCaminho(MetodoStatic.getNumAleatorio(0, 1));
             case 3: return local.lagoNoCaminho(MetodoStatic.getNumAleatorio(0, 1));
@@ -150,14 +156,14 @@ public class Tabuleiro extends PrintTabuleiro {
 
         switch(direcao) {
             case 0: return local.ganhaQuatroMoedas(jogador);
-            case 1: local.localVazio(); return 0;
+            case 1: return local.localVazio();
             case 2: return local.lagoNoCaminho(MetodoStatic.getNumAleatorio(0, 1));
             case 3: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
             case 4: return local.ganhaQuatroMoedas(jogador);
             case 5: return local.ganhaQuatroMoedas(jogador);
             case 6: return local.ganhaQuatroMoedas(jogador);
             case 7: return local.surpresa(MetodoStatic.getNumAleatorio(0, 2), jogador, moedas, moedasAdv);
-            default: local.localVazio(); return 0;
+            default: return local.localVazio();
         }
     }
 }
