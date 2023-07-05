@@ -26,8 +26,13 @@ public class MetodoStatic {
         return;
     }
 
-    static public int resposta() {
+    static public int respostaInt() {
         Scanner ler = new Scanner(System.in);
         return ler.nextInt();
+    }
+
+    static public String respostaString() {
+        Scanner ler = new Scanner(System.in);
+        return ler.nextLine();
     }
 }
