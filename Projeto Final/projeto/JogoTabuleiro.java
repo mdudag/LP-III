@@ -1,7 +1,7 @@
 package projeto;
 
 import java.util.Scanner;
-import java.lang.System;
+import java.lang.System; 
 
 public class JogoTabuleiro implements Jogo {
     static final protected int QUANT_JOGADORES = 2;  // Quantidade permitida de jogadores
@@ -22,11 +22,13 @@ public class JogoTabuleiro implements Jogo {
 
     @Override
     public void iniciarJogo() {
-        System.out.println("\n ------------------------------ J O G O ------------------------------\n"); 
+        System.out.println("\n -------------------------------   MOEDAS DA SALVAÇÃO   -------------------------------\n"); 
         // System.out.println();
 
         contextoDoJogo(); MetodoStatic.systemPause();
         informacoesDoJogo(); MetodoStatic.systemPause();
+        fimContextualizacao(); MetodoStatic.systemPause();
+
         MetodoStatic.limpaTela();
 
         System.out.println("Iniciando Jogo...\n"); 
@@ -34,21 +36,22 @@ public class JogoTabuleiro implements Jogo {
 
         System.out.println("\n  --- Tabuleiro dos Jogadores ---\n");
         mostrarTabuleiroDoJogo(1, 0);
-        System.out.println("\n\nAmbos os jogadores ganharam 10 moedas!");
+        MetodoStatic.systemPause();
+
         mudarNivel();
     } 
 
     public void jogar() {
         do {
             System.out.println("       NIVEL" + nivelAtual);
-            vezDoJogador(tab1);
+            vezDoJogador(tab1, tab2.moedas);
             MetodoStatic.systemPause();
-            vezDoJogador(tab2);
+            vezDoJogador(tab2, tab1.moedas);
 
             // Se não for o último nível, perguntar se deseja continuar jogando
             if (nivelAtual != 8) {
                 continuarJogo();
-                ler.nextLine();  // Para pegar o caracter de salto de linha (bug)
+                ler.nextLine();  // Para pegar o caracter de salto de linha 
             }
             else fimDoJogo();
 
@@ -57,32 +60,7 @@ public class JogoTabuleiro implements Jogo {
         } while(nivelAtual <= 8);
     }
 
-    public void vezDoJogador1() {
-        System.out.println("\n ------------------");
-        System.out.println("  Vez do Jogador 1");
-        System.out.println("\n" + tab1.jogador + ", agite o amuleto");
-        String resp = ler.nextLine();
-        tab1.nivelAtual(agitarAmuleto(tab1), nivelAtual);
-
-        if (nivelAtual == 8)
-            System.out.printf("\n  === %s chegou no destino final ===\n", tab1.jogador);
-        
-    }
-
-    public void vezDoJogador2() {
-        System.out.println("\n ------------------");
-        System.out.println("  Vez do Jogador 2");
-        System.out.println("\n" + tab2.jogador + ", agite o amuleto");
-        String resp = ler.nextLine();
-        tab2.nivelAtual(agitarAmuleto(tab2), nivelAtual);
-
-        if (nivelAtual == 8)
-            System.out.printf("\n  === %s chegou no destino final ===\n", tab2.jogador);
-            
-        //MetodoStatic.systemPause();
-    }
-
-    public void vezDoJogador(Tabuleiro tab) {
+    public void vezDoJogador(Tabuleiro tab, int moedasAdv) {
         int i;
         if (tab == tab1) i = 1;
         else i = 2;
@@ -91,7 +69,7 @@ public class JogoTabuleiro implements Jogo {
         System.out.println("  Vez do Jogador " + i);
         System.out.println("\n" + tab.jogador + ", agite o amuleto");
         String resp = ler.nextLine();
-        tab.nivelAtual(agitarAmuleto(tab), nivelAtual);
+        tab.moedas += tab.nivelAtual(agitarAmuleto(tab), nivelAtual, moedasAdv);
 
         if (nivelAtual==8) {
             System.out.printf("\n  === %s chegou no destino final ===\n", tab.jogador);
@@ -136,20 +114,58 @@ public class JogoTabuleiro implements Jogo {
                            "+--------------------------------------------------------------------+");
     }
 
+    public void fimContextualizacao() {
+        System.out.println("\n  Assim que as regras foram explicadas, eles se viram separados e lançados"+
+                           "\n nas profundezas da floresta. Cada um deles começou sua jornada por caminhos"+
+                           "\n sinuosos e repletos de desafios.");
+        
+        MetodoStatic.systemPause();
+
+        System.out.println("\n  Eles sabiam que, além de sobreviver, precisavam ser astutos para garantir"+
+                           "\n o maior número possível de moedas.");
+    }
+
     @Override
     public void contextoDoJogo() {
-        System.out.println("Contextualizando...");
+        System.out.println("\n  No coração da civilização asteca havia uma tribo que adorava seus deuses atraves"+
+                           "\n de rituais de sacrifício humano. Os astecas acreditavam que essas ofertas eram"+
+                           "\n necessárias para garantir o equilíbrio entre o mundo humano e o divino.");
+
+        MetodoStatic.systemPause();
+        
+        System.out.println("\n  Em meio a esses tempos sombrios, dois prisioneiros capturados se encontravam"+
+                           "\n em uma situação desesperadora...");
+
+        MetodoStatic.systemPause();
+
+        System.out.println("\n  Eles foram levados para o centro cerimonial, onde um jogo de tabuleiro místico"+
+                           "\n foi preparado para determinar o destino deles. Os astecas acreditavam que os deuses"+
+                           "\n concederiam uma chance de sobrevivência, e a competição seria realizada em um"+
+                           "\n labirinto na densa floresta. No entanto, havia uma condição: apenas um deles poderia"+
+                           "\n escapar e a decisão seria baseada na quantidade de moedas coletadas.");
     }
 
-    @Override
-    public void mostrarTabuleiroDoJogo(int jogador, int direcao) {
-        if (jogador == 1)
-            tab1.printTabuleiro(nivelAtual, direcao);
+    public void mostrarTabuleiroDoJogo(int jogador, int direcao, int moedasAdv) {
+        if (jogador == 1) {
+            int aux = tab1.nivelAtual(direcao, nivelAtual, moedasAdv);
+
+            if (nivelAtual==0)
+                tab2.moedas += aux;
+
+            tab1.moedas += aux;
+        }
         else
-            tab2.printTabuleiro(nivelAtual, direcao);
+            tab2.nivelAtual(direcao, nivelAtual, moedasAdv);
     }
 
-    @Override
+    public void mostrarTabuleiroDoJogo(int jogador, int direcao) {
+        mostrarTabuleiroDoJogo(jogador, direcao, 0);
+    }
+
+    public void mostrarTabuleiroDoJogo(int jogador) {
+        mostrarTabuleiroDoJogo(jogador, 0, 0);
+    }
+
     public int agitarAmuleto(Tabuleiro tab) {
         tab.localAnterior = MetodoStatic.getNumAleatorio(tab.localAnterior, tab.localAnterior+1);
         return tab.localAnterior;
@@ -179,7 +195,7 @@ public class JogoTabuleiro implements Jogo {
         System.out.printf("\n Moedas adquiridas pelos jogadores:");
 
         String g, p;
-        if ( tab1.moedas == tab2.moedas) {
+        if (tab1.moedas == tab2.moedas) {
             System.out.printf("\n empate");
             return;
         }
@@ -188,11 +204,10 @@ public class JogoTabuleiro implements Jogo {
             p = tab2.jogador;
         }
         else {
-            g = tab1.jogador;
-            p = tab2.jogador;
+            g = tab2.jogador;
+            p = tab1.jogador;
         }
 
-        System.out.printf("\n\n  Parabéns, %s! Você consegui escapar.", g, 
-                          "\n  %s, você não consegui moedas suficientes. Lamento...", p);
+        System.out.printf("\n\n  Parabéns, %s! Você conseguiu escapar.\n  %s, você não conseguiu moedas suficientes. Lamento...\n\n", g,  p);
     }
 }
