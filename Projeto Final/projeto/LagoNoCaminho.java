@@ -21,7 +21,7 @@ public class LagoNoCaminho {
 
             if (JogoTabuleiro.nivelAtual != 8)
                 System.out.println("Continue jogando para tentar recuperá-las!");
-            return i;
+            return -i;
         }
         else {
             System.out.println("Você consegiu dar a volta no lago sem problemas! ");
@@ -45,7 +45,7 @@ public class LagoNoCaminho {
             if (JogoTabuleiro.nivelAtual != 8)
                 System.out.println("Continue jogando para tentar recuperá-las!");
 
-            return i;
+            return -i;
         }
         else {
             System.out.println("Você consegiu sair do lago sem problemas! ");
@@ -84,7 +84,7 @@ public class LagoNoCaminho {
             if (JogoTabuleiro.nivelAtual != 8)
                 System.out.println("Continue jogando para tentar recuperá-las!");
             
-            return i;
+            return -i;
         }
     }
     
@@ -92,6 +92,6 @@ public class LagoNoCaminho {
         System.out.println("\n\n\t\t             O__,");       
         System.out.println("\t\t         /\\__|\\/_______/\\");
         System.out.println("\t\t         \\    /         /");
-        System.out.println("\t\t ~~~~^~^~^~^^`~^~^~^~^~~^~^~^~^~^~^~^~^~~~^~^~~~^~^~~");
+        System.out.println("\t\t ~~~~^~^~^~^^`~^~^~^~^~~^~^~^~^~^~^~^~^~~~^~^~~~^~^~~\n");
     }
 }
