@@ -1,23 +1,16 @@
 package projeto;
 
-import java.util.Scanner;
 import java.lang.System; 
 
 public class JogoTabuleiro implements Jogo {
-    static final protected int QUANT_JOGADORES = 2;  // Quantidade permitida de jogadores
-    static protected short nivelAtual;
-    private Tabuleiro tab1, tab2;
-
-    Scanner ler = new Scanner(System.in);
+    static final public int QUANT_JOGADORES = 2;  // Quantidade permitida de jogadores
+    static public short nivelAtual;
+    private Tabuleiro tab1, tab2;   // Relacionamento de Agregação
 
     public JogoTabuleiro(Tabuleiro tab1, Tabuleiro tab2) {
         this.tab1 = tab1;
         this.tab2 = tab2;
         nivelAtual = 0;
-    }
-
-    static public short getNivelAtual() {
-        return nivelAtual;
     }
 
     @Override
@@ -41,90 +34,6 @@ public class JogoTabuleiro implements Jogo {
         mudarNivel();
     } 
 
-    public void jogar() {
-        do {
-            System.out.println("       NIVEL" + nivelAtual);
-            vezDoJogador(tab1, tab2.moedas);
-            MetodoStatic.systemPause();
-            vezDoJogador(tab2, tab1.moedas);
-
-            // Se não for o último nível, perguntar se deseja continuar jogando
-            if (nivelAtual != 8) {
-                continuarJogo();
-                ler.nextLine();  // Para pegar o caracter de salto de linha 
-            }
-            else fimDoJogo();
-
-            mudarNivel();
-
-        } while(nivelAtual <= 8);
-    }
-
-    public void vezDoJogador(Tabuleiro tab, int moedasAdv) {
-        int i;
-        if (tab == tab1) i = 1;
-        else i = 2;
-        
-        System.out.println("\n ------------------");
-        System.out.println("  Vez do Jogador " + i);
-        System.out.println("\n" + tab.jogador + ", agite o amuleto");
-        String resp = ler.nextLine();
-        tab.moedas += tab.nivelAtual(agitarAmuleto(tab), nivelAtual, moedasAdv);
-
-        if (nivelAtual==8) {
-            System.out.printf("\n  === %s chegou no destino final ===\n", tab.jogador);
-            if (tab==tab2)
-                MetodoStatic.systemPause();
-        }
-    }
-
-    private void mudarNomeJogadores() {
-        System.out.print("Informe o nome do jogador 1: ");
-        tab1.jogador = ler.nextLine();
-        System.out.print("Informe o nome do jogador 2: ");
-        tab2.jogador = ler.nextLine();
-
-        if (tab1.jogador.equals(""))
-            tab1.jogador = "Jogador 1";
-        if (tab2.jogador.equals(""))
-            tab2.jogador = "Jogador 2";
-        else if (tab1.jogador.equals(tab2.jogador))
-            tab2.jogador += "2";
-    }
-
-    private void mudarNivel() {
-        ++nivelAtual;
-    }
-
-    public void informacoesDoJogo() {
-        System.out.println("+--------------------------------------------------------------------+\n" + 
-                           "|                      INFORMAÇÕES SOBRE O JOGO                      |\n" +
-                           "+--------------------------------------------------------------------+\n" +
-                           "|   - Quantidade de jogadores: "+QUANT_JOGADORES+"                                     |\n" +
-                           "|   - Para passar pelos caminhos você precisa agitar o amuleto       |\n" + 
-                           "|     para que ele defina qual caminho seguir.                       |\n" +
-                           "|   - Para agitar o amuleto tecle enter                              |\n" +
-                           "|   - Símbolos no caminho:                                           |\n" + 
-                           "|       'o': Local que não foi percorrido                            |\n" +
-                           "|       '#': Local que foi percorrido ou onde o jogador se encontra  |\n" +
-                           "|       '@': Local onde há uma surpresa                              |\n" +
-                           "|   - Quando 'Continuar?' aparecer na tela:                          |\n" + 
-                           "|       (1) Para continuar jogando                                   |\n" + 
-                           "|       (2) Para fim de jogo                                         |\n" + 
-                           "+--------------------------------------------------------------------+");
-    }
-
-    public void fimContextualizacao() {
-        System.out.println("\n  Assim que as regras foram explicadas, eles se viram separados e lançados"+
-                           "\n nas profundezas da floresta. Cada um deles começou sua jornada por caminhos"+
-                           "\n sinuosos e repletos de desafios.");
-        
-        MetodoStatic.systemPause();
-
-        System.out.println("\n  Eles sabiam que, além de sobreviver, precisavam ser astutos para garantir"+
-                           "\n o maior número possível de moedas.");
-    }
-
     @Override
     public void contextoDoJogo() {
         System.out.println("\n  No coração da civilização asteca havia uma tribo que adorava seus deuses atraves"+
@@ -145,6 +54,100 @@ public class JogoTabuleiro implements Jogo {
                            "\n escapar e a decisão seria baseada na quantidade de moedas coletadas.");
     }
 
+    @Override
+    public void informacoesDoJogo() {
+        System.out.println(" __| |____________________________________________________________________| |__\n" + 
+                           "(__   ____________________________________________________________________   __)\n" +
+                           "   | |                                                                    | |\n" + 
+                           "   | |                      INFORMAÇÕES SOBRE O JOGO                      | |\n" +
+                           "   | |                   -----------------------------                    | |\n" + 
+                           "   | |                                                                    | |\n" + 
+                           "   | |   - Quantidade de jogadores: "+QUANT_JOGADORES+"                                     | |\n" + 
+                           "   | |   - Para passar pelos caminhos você precisa agitar o amuleto       | |\n" + 
+                           "   | |     para que ele defina qual caminho seguir.                       | |\n" + 
+                           "   | |   - Para agitar o amuleto tecle enter                              | |\n" + 
+                           "   | |   - Símbolos no caminho:                                           | |\n" + 
+                           "   | |       'o': Local que não foi percorrido                            | |\n" + 
+                           "   | |       '#': Local que foi percorrido ou onde o jogador se encontra  | |\n" + 
+                           "   | |       '@': Local onde há uma surpresa                              | |\n" + 
+                           "   | |   - Quando 'Continuar?' aparecer na tela:                          | |\n" + 
+                           "   | |       (1) Para continuar jogando                                   | |\n" + 
+                           "   | |       (2) Para fim de jogo                                         | |\n" + 
+                           " __| |____________________________________________________________________| |__\r\n" + 
+                           "(__   ____________________________________________________________________   __)\r\n" + 
+                           "   | |                                                                    | |\n");
+    }
+
+    public void jogar() {
+        do {
+            System.out.println("       NIVEL" + nivelAtual);
+            vezDoJogador(tab1, tab2.moedas);
+            MetodoStatic.systemPause();
+            vezDoJogador(tab2, tab1.moedas);
+
+            // Se não for o último nível, perguntar se deseja continuar jogando
+            if (nivelAtual != 8) continuarJogo(); 
+            else                 fimDoJogo();
+
+            mudarNivel();
+
+        } while(nivelAtual <= 8);
+    }
+
+    public void vezDoJogador(Tabuleiro tab, int moedasAdv) {
+        int i;
+        if (tab == tab1) i = 1;
+        else i = 2;
+        
+        System.out.println("\n ------------------");
+        System.out.println("  Vez do Jogador " + i);
+        System.out.println("\n" + tab.jogador + ", agite o amuleto");
+        String resp = MetodoStatic.respostaString();
+
+        // adiciono nas moedas do tabuleiro do jogador o valor modificado delas
+        tab.moedas = tab.nivelAtual(agitarAmuleto(tab), nivelAtual, moedasAdv);
+
+        if (nivelAtual==8) {
+            System.out.printf("\n  === %s chegou no destino final ===\n", tab.jogador);
+            if (tab==tab2)
+                MetodoStatic.systemPause();
+        }
+    }
+
+    private void mudarNomeJogadores() {
+        System.out.print("Informe o nome do jogador 1: ");
+        tab1.jogador = MetodoStatic.respostaString();
+
+        System.out.print("Informe o nome do jogador 2: ");
+        tab2.jogador = MetodoStatic.respostaString();
+
+        validaJogadores();
+    }
+
+    private void validaJogadores() {
+        if (tab1.jogador.equals(""))
+            tab1.jogador = "Jogador 1";
+        if (tab2.jogador.equals(""))
+            tab2.jogador = "Jogador 2";
+        else if (tab1.jogador.equals(tab2.jogador))
+            tab2.jogador += "2";
+    }
+
+    private void mudarNivel() { ++nivelAtual; }
+
+    public void fimContextualizacao() {
+        System.out.println("\n  Assim que as regras foram explicadas, eles se viram separados e lançados"+
+                           "\n nas profundezas da floresta. Cada um deles começou sua jornada por caminhos"+
+                           "\n sinuosos e repletos de desafios.");
+        
+        MetodoStatic.systemPause();
+
+        System.out.println("\n  Eles sabiam que, além de sobreviver, precisavam ser astutos para garantir"+
+                           "\n o maior número possível de moedas.");
+    }
+
+    // ---------------Sobrecarga de Métodos---------------
+    
     public void mostrarTabuleiroDoJogo(int jogador, int direcao, int moedasAdv) {
         if (jogador == 1) {
             int aux = tab1.nivelAtual(direcao, nivelAtual, moedasAdv);
@@ -166,7 +169,18 @@ public class JogoTabuleiro implements Jogo {
         mostrarTabuleiroDoJogo(jogador, 0, 0);
     }
 
+    // ---------------------------------------------------
+
+    /* 
+       Do jeito que o grafo foi feito, quando está em uma posição, você 
+       só tem duas posibilidades, se estiver na posição 0, tem a posição
+       0 e 1 para prosseguir no tabuleiro, se está na 1, tem a posição 1 e 2...
+    */
+
     public int agitarAmuleto(Tabuleiro tab) {
+        // Guarda-se sempre o local anterior para poder usar na próxima rodada
+        // O valor do amuleto é um número aleatório referente a posição do local 
+        // que você está e o incremento dela
         tab.localAnterior = MetodoStatic.getNumAleatorio(tab.localAnterior, tab.localAnterior+1);
         return tab.localAnterior;
     }
@@ -176,12 +190,13 @@ public class JogoTabuleiro implements Jogo {
         
         do {
             System.out.print("\nContinuar? ");
-            i = ler.nextInt();
+            i = MetodoStatic.resposta();  
             
-            if (i==1) {
-                MetodoStatic.limpaTela();
-                break;
-            }
+            // Continua o jogo
+            if (i==1) {  
+                MetodoStatic.limpaTela(); break;
+            }  
+            // Finaliza o jogo
             else if (i==2) System.exit(-1);
             
         } while(i!=1 || i!=2);
