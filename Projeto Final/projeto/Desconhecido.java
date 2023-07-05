@@ -3,9 +3,7 @@ package projeto;
 abstract public class Desconhecido {
     private int quantAjudas;
 
-    public Desconhecido() {
-        quantAjudas = 0;
-    }
+    public Desconhecido() { quantAjudas = 0; }
 
     public int pedirAjuda() {
         int i = MetodoStatic.getNumAleatorio(0, 1);
@@ -13,7 +11,7 @@ abstract public class Desconhecido {
         System.out.println("Deseja ajudar?" + 
                            "\n  1 - Ajudar" + 
                            "\n  2 - Ignorar");
-        int resp = MetodoStatic.resposta();
+        int resp = MetodoStatic.respostaInt();
 
         return tipoDeDesconhecido(i, resp);
     }
@@ -38,7 +36,6 @@ abstract public class Desconhecido {
         case 1: 
             int i = MetodoStatic.getNumAleatorio(10, 50);
             
-
             if (tipo==0) aux =  ladrao(i);
             else         aux =  pessoaFerida(i);
 
@@ -84,7 +81,7 @@ abstract public class Desconhecido {
     private int ladrao(int moedasPerdidas) {
         System.out.println("\nQue azar, o desconhecido não era uma pessoa ferida!" +
                            "\nEle levou " + moedasPerdidas + " moedas, mas não desanime.");
-        return moedasPerdidas;
+        return -moedasPerdidas;
     }
     
     private int pessoaFerida(int moedasGanhas) {
