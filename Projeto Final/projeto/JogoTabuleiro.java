@@ -1,6 +1,6 @@
 package projeto;
 
-import java.lang.System; 
+import java.lang.System;  
 
 public class JogoTabuleiro implements Jogo {
     static final public int QUANT_JOGADORES = 2;  // Quantidade permitida de jogadores
@@ -104,8 +104,8 @@ public class JogoTabuleiro implements Jogo {
         System.out.println("\n" + tab.jogador + ", agite o amuleto");
         String resp = MetodoStatic.respostaString();
 
-        // adiciono nas moedas do tabuleiro do jogador o valor modificado delas
-        tab.moedas = tab.nivelAtual(agitarAmuleto(tab), nivelAtual, moedasAdv);
+        // As moedas são adicionadas na classe Tabuleiro
+        tab.nivelAtual(agitarAmuleto(tab), nivelAtual, moedasAdv);
 
         if (nivelAtual==8) {
             System.out.printf("\n  === %s chegou no destino final ===\n", tab.jogador);
@@ -154,8 +154,6 @@ public class JogoTabuleiro implements Jogo {
 
             if (nivelAtual==0)
                 tab2.moedas += aux;
-
-            tab1.moedas += aux;
         }
         else
             tab2.nivelAtual(direcao, nivelAtual, moedasAdv);
@@ -190,7 +188,7 @@ public class JogoTabuleiro implements Jogo {
         
         do {
             System.out.print("\nContinuar? ");
-            i = MetodoStatic.resposta();  
+            i = MetodoStatic.respostaInt();  
             
             // Continua o jogo
             if (i==1) {  
