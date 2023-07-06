@@ -63,7 +63,7 @@ abstract public class Desconhecido {
     }
 
     public void desenhoArvore() {
-        System.out.println("\t\t         .{{}}}}}}.                                  .{{}}}}}}.");   
+        System.out.println("\t\t\n\n         .{{}}}}}}.                                  .{{}}}}}}.");   
         System.out.println("\t\t        {{{{{{(`)}}}.                               {{{{{{(`)}}}.");
         System.out.println("\t\t       {{{(`)}}}}}}}}}                             {{{(`)}}}}}}}}}");
         System.out.println("\t\t      }}}}}}}}}{{(`){{{                           }}}}}}}}}{{(`){{{");
@@ -75,7 +75,6 @@ abstract public class Desconhecido {
         System.out.println("\t\t      `\"\"'\" |   | \"'\"'`                           `\"\"'\" |   | \"'\"'`");
         System.out.println("\t\t      (`)  /     \\                                     /     \\");
         System.out.println("\t\t ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        MetodoStatic.systemPause();
     }
 
     private int ladrao(int moedasPerdidas) {
