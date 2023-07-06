@@ -6,7 +6,7 @@ public class ProjetoJogo {
 
         tab1 = new Tabuleiro();
         tab2 = new Tabuleiro();
-
+                                                
         JogoTabuleiro jogo = new JogoTabuleiro(tab1, tab2);
         jogo.iniciarJogo();
         
