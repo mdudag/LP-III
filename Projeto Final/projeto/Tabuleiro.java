@@ -56,6 +56,8 @@ public class Tabuleiro extends PrintTabuleiro {
         // Incrementando as moedas ganhas
         moedas+=aux;
 
+        if (moedas<0) moedas=0;
+
         // O valor conseguido no nível é retornado caso seja necessário
         // em algum momento, como para mandar o valor para o adversário
         // no método mostraTabuleiroDoJogo da classe Tabuleiro
