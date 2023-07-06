@@ -6,6 +6,7 @@ public class AventureiroFerido extends Desconhecido {
         System.out.println("\n   Tomás era um aventureiro destemido, sempre em busca de novas experiências e"+
                            "\n paisagens impressionantes. Em sua jornada solitária, ele se deparou com uma árvore"+
                            "\n majestosa, com raízes retorcidas e um dossel frondoso.");
+                           
         desenhoArvore();
         MetodoStatic.systemPause();
         
