@@ -4,6 +4,7 @@ public class IndigenaFerido extends Desconhecido {
     @Override
     public void historia() {
         desenhoArvore();
+        
         System.out.println("\n   Enquanto caminhava por entre a vegetação densa, o indígena chamado Cauã avistou"+
                             "\n uma árvore majestosa, cujas raízes se estendiam pelo chão, formando um intricado"+
                             "\n emaranhado. Impulsionado pela curiosidade, ele decidiu escalá-la para obter uma"+
